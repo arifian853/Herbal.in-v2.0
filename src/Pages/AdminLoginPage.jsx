@@ -45,7 +45,7 @@ export const AdminLoginPage = () => {
         </div>
         <div className="right-side-login">
           <div className="form">
-            <h1 className='text-4xl font-black text-center'> Login </h1>
+            <h1 className='text-4xl font-black text-center'>Admin Login </h1>
             <br />
             <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label> <br />

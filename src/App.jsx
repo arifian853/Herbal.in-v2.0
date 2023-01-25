@@ -10,6 +10,9 @@ import { RegisterPage } from './Pages/RegisterPage';
 import { AdminLoginPage } from './Pages/AdminLoginPage';
 import { NotFoundPage } from './Pages/NotFoundPage';
 import { HomePage } from './Pages/HomePage';
+import { Navbar } from './Components/Navbar';
+import { Articles } from './Pages/Articles';
+import { Products } from './Pages/Products';
 
 
 function App() {
@@ -35,9 +38,25 @@ function App() {
             
             <Route path='/home' element={
               <ProtectedRoute>
+                  <Navbar />
                   <HomePage />
               </ProtectedRoute>
             } />
+
+            <Route path='/products' element={
+              <ProtectedRoute>
+                  <Navbar />
+                  <Products />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/articles' element={
+              <ProtectedRoute>
+                  <Navbar />
+                  <Articles />
+              </ProtectedRoute>
+            } />
+
           </Routes>
         </UserAuthContextProvider>
       </main>

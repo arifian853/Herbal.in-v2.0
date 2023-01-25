@@ -14,7 +14,7 @@ export const NotFoundPage = () => {
         <h1 className='text-5xl font-black flex align-middle text-center justify-center p-4'><AiOutlineStop /> </h1>
         <hr class="border-1 border-black m-3 drop-shadow-xl"/>
         <p>Sepertinya halaman yang anda cari tidak ditemukan :)</p>
-            <span className='text-green-900'><u> <Link to='/home'> <p> Kembali ke halaman utama</p> </Link> </u></span>
+            <span className='text-green-900'><u> <Link to='/'> <p> Kembali ke halaman utama</p> </Link> </u></span>
         </div>
     </div>
   )

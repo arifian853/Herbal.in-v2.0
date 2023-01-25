@@ -8,9 +8,10 @@ import { Helmet } from 'react-helmet';
 import { ImPriceTags } from 'react-icons/im';
 import { MdHealthAndSafety } from 'react-icons/md';
 import { BsBagCheckFill } from 'react-icons/bs';
-
+import { useUserAuth } from '../Context/UserAuthContext';
 
 export const HomePage = () => {
+  const { user } = useUserAuth();
   const productsOffer = getProdOffers();
 
   return (
@@ -21,6 +22,7 @@ export const HomePage = () => {
     <div className="homepage-main-body">
         <div className="homepage-main-banner">
             <h1 className='text-3xl font-black'>Selamat Datang di Herbal.in!</h1>
+            <p>Pengguna : {user && user.email}</p>
             <br /><br /><hr className='homepage-line'/> <br /><br />
             
             <div className="banner-desc">
@@ -31,13 +33,13 @@ export const HomePage = () => {
             <br /><br />
             <div className="jargon">
                 <div className="jargon-points">
-                    <ImPriceTags /> Special Price
+                    <ImPriceTags /> Harga Spesial
                 </div>
                 <div className="jargon-points">
                     <MdHealthAndSafety /> 100% Natural
                 </div>
                 <div className="jargon-points">
-                    <BsBagCheckFill /> Fast and Easy
+                    <BsBagCheckFill /> Cepat dan Mudah
                 </div>
             </div>
         </div>
@@ -46,7 +48,7 @@ export const HomePage = () => {
         <div className="homepage-main-offers">
             {
                 productsOffer.map((productOffer) => (
-                    <div className="product-item shadow-lg">
+                    <div className="product-item">
                         <img src={productOffer.product_img} alt="Product Offers" className="product-img" />
                         <div className="product-desc">
                         <p className='product-category'>{productOffer.product_ctg}</p>
