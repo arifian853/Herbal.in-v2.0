@@ -17,7 +17,7 @@ export const LandingPage = () => {
             <a href="#contact">About Us</a>
         </div>
     <div className='landing-page-container'>
-       <div className="landing-page-main">
+       <div className="landing-page-main" id='home'>
             <div className="left-landing">
                 <div className="greeting">
                     <img src="../Assets/leaf.png" alt="Logo Herbal.in" />

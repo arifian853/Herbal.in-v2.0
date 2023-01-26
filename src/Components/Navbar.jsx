@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useUserAuth } from '../Context/UserAuthContext';
 import { FiLogOut } from 'react-icons/fi';
 
-export const Navbar = () => {
+export const Navbar = ({ cartItems }) => {
   const { logOut } = useUserAuth();
   const handleLogout = async () => {
       try {
@@ -66,7 +66,10 @@ export const Navbar = () => {
                     </Link>
                     <Link to='/cart'>
                         <li className={`p-3 ${activeTab === 'Cart' ? 'nav-links' : ''}`} onClick={() => setActiveTab('Cart')}>
-                            Keranjang
+                            Keranjang {' '}
+                        <span className="badge badge-warning" id="lblCartCount">
+                          {/* {cartItems.length} */} 2
+                        </span>
                         </li>
                     </Link>
                     <li className='p-3 btn-logout flex items-center gap-2' onClick={handleLogout}>

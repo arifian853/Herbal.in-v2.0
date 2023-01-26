@@ -1,16 +1,15 @@
-import React from 'react';
-
+import { React } from 'react';
 import { getProdOffers } from '../Utils/prodOffersLocal';
 import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import { Helmet } from 'react-helmet';
-
 import { ImPriceTags } from 'react-icons/im';
 import { MdHealthAndSafety } from 'react-icons/md';
-import { BsBagCheckFill } from 'react-icons/bs';
+import { BsBagCheckFill, BsCartPlus } from 'react-icons/bs';
 import { useUserAuth } from '../Context/UserAuthContext';
+import { FooterInside } from '../Components/FooterInside';
 
-export const HomePage = () => {
+export const HomePage = ({ onAddHandler }) => {
   const { user } = useUserAuth();
   const productsOffer = getProdOffers();
 
@@ -54,12 +53,16 @@ export const HomePage = () => {
                         <p className='product-category'>{productOffer.product_ctg}</p>
                         <p className='product-name font-black'><Link to={`/products/${productOffer.id}`}>{productOffer.product_name}</Link></p>
                         <p>Harga : <NumericFormat value={productOffer.product_price} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={'.00,-'}/> </p>
+                            <div className="flex items-center text-center">
+                                <button className='btn-add-to-cart flex items-center justify-center text-sm gap-1' onClick={() => onAddHandler(productOffer)}> Beli sekarang <BsCartPlus /> </button>
+                            </div>
                         </div>
                     </div>
                 ))
             }
         </div>
     </div>
+    <FooterInside />
    </>
   )
 }

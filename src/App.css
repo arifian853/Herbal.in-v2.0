@@ -291,6 +291,13 @@ footer {
   text-align: center;
 }
 
+.footer {
+  background-color: var(--green1);
+  color: var(--black);
+  padding: 1em;
+  text-align: center;
+}
+
 /*Login and Register Page*/
 
 .login-page {
@@ -431,7 +438,7 @@ footer {
 
 .product-item {
   width: 220px;
-  height: 300px;
+  height: 325px;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
@@ -458,6 +465,25 @@ footer {
 
 .product-name {
   color: var(--green4);
+}
+
+.btn-add-to-cart {
+  background-color: var(--white);
+  text-align: center;
+  padding: 7px;
+  width: 180px;
+  margin: 15px auto;
+  border-radius : 10px;
+  border: 1px solid var(--green2);
+  color: var(--green4);
+  transition: 0.4s;
+}
+
+.btn-add-to-cart:hover {
+  background-color: var(--green1);
+  border: 1px solid var(--black);
+  color: black;
+  transition: 0.4s;
 }
 
 /*NAVBAR*/
@@ -501,6 +527,15 @@ footer {
   cursor: pointer;
 }
 
+#lblCartCount {
+  font-size: 14px;
+  background: #cfff8d;
+  border-radius: 12px;
+  color: black;
+  padding: 0 5px;
+  margin-left: 3px;
+  vertical-align: top;
+}
 
 /*RESPONSIVE*/
 
