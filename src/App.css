@@ -19,6 +19,44 @@ html, body {
   scroll-behavior: smooth;
 }
 
+/*LOADING*/
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #dfc;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #dfc transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /*SCROLLBAR*/
 
 /* Width */
@@ -394,6 +432,14 @@ footer {
   margin: -20px auto;
 }
 
+.line {
+  width: 70px;
+  background: var(--green5);
+  border: 2px solid var(--green5);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
 .homepage-main-banner {
   background-color: var(--green1);
   width: 90%;
@@ -438,7 +484,7 @@ footer {
 
 .product-item {
   width: 220px;
-  height: 325px;
+  height: 320px;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
@@ -465,6 +511,10 @@ footer {
 
 .product-name {
   color: var(--green4);
+  text-align: justify;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .btn-add-to-cart {
@@ -537,6 +587,45 @@ footer {
   vertical-align: top;
 }
 
+/*Products*/
+.main-product-page {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  align-items: center;
+  padding: 2em;
+  background-color: var(--white);
+  flex-direction: column;
+}
+
+.search-container {
+  margin-top: 10px;
+}
+
+.search-product-input {
+  width: 550px;
+  padding: 7px;
+  border-radius: 10px;
+  border: 2px solid var(--green2);
+}
+
+.filter-item select {
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid var(--green2);
+  transition: 0.4s;
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+}
+
+
 /*RESPONSIVE*/
 
 /*
@@ -570,7 +659,7 @@ For desktops: 1025px to 1200px
 
   .landing-page-main {
     flex-direction: column;
-    height: 150vh;
+    height: 100vh;
     width: 100%;
   }
 
@@ -756,5 +845,13 @@ For desktops: 1025px to 1200px
     width: 100%;
     padding: 1.2em;
     border-radius: 7px;
+  }
+
+  /*Products*/
+  .search-product-input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 10px;
+    border: 2px solid var(--green2);
   }
 }

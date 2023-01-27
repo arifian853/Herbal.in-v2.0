@@ -36,7 +36,7 @@ export const RegisterPage = () => {
   return (
     <div className='login-page'>
     <Helmet>
-        <title>Herbal.in 2.0 - Register</title>
+        <title>Herbal.in 2.0 - Daftar</title>
     </Helmet>
     <Toaster />
         <div className="left-side-login">

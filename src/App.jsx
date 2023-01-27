@@ -1,6 +1,8 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { React, useState, useEffect } from 'react';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
 import './App.css';
+
+import { getAllProducts } from './Utils/ProductsFetcher';
 
 import { UserAuthContextProvider } from './Context/UserAuthContext';
 import { ProtectedRoute } from './Components/ProtectedRoute';
@@ -16,6 +18,55 @@ import { Products } from './Pages/Products';
 
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [productItems, setProductItems] = useState([]);
+  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = useState(() => {
+    return searchParams.get('keyword') || '';
+  });
+  const [selectedFilter, setSelectedFilter] = useState();
+
+  useEffect(() => {
+    getAllProducts().then(({ data }) => {
+      setProductItems(data);
+      setLoading(false);
+    });
+
+    return () => {
+      setLoading(true);
+    };
+  }, []);
+
+  function onKeywordChangeHandler(keyword) {
+    setKeyword(keyword);
+    setSearchParams({ keyword });
+  }
+
+  function onSelectedFilterHandler(selectedFilter) {
+    setSelectedFilter(selectedFilter);
+  }
+
+  function onAddHandler(productItem) {
+    const productPresent = cartItems.find((cartItem) => cartItem.id === productItem.id);
+
+    if (!productPresent) {
+      setCartItems([...cartItems, { ...productItem, product_qty: 1 }]);
+    } else {
+      setCartItems(cartItems.map((cartItem) => (cartItem.id === productItem.id ? { ...productPresent, product_qty: productPresent.product_qty + 1 } : cartItem)));
+    }
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }
+
+  // function onRemoveHandler(productItem) {
+  //   const productPresent = cartItems.find((cartItem) => cartItem.id === productItem.id);
+  //   if (productPresent.product_qty === 1) {
+  //     setCartItems(cartItems.filter((cartItem) => cartItem.id !== productItem.id));
+  //   } else {
+  //     setCartItems(cartItems.map((cartItem) => (cartItem.id === productItem.id ? { ...productPresent, product_qty: productPresent.product_qty - 1 } : cartItem)));
+  //   }
+  // }
+
   return (
     <>
       <main>
@@ -35,24 +86,34 @@ function App() {
 
             {/* Admin Login Page */}
             <Route path='/admin-login' element={<AdminLoginPage />} />
-            
+
+            {/* Home Page */}
             <Route path='/home' element={
               <ProtectedRoute>
-                  <Navbar />
-                  <HomePage />
+                  <Navbar cartItems={cartItems} />
+                  <HomePage onAddHandler={onAddHandler} />
               </ProtectedRoute>
             } />
 
+            {/* Products Page */}
             <Route path='/products' element={
               <ProtectedRoute>
-                  <Navbar />
-                  <Products />
+                  <Navbar cartItems={cartItems} />
+                  <Products  
+                    keyword={keyword}
+                    keywordChange={onKeywordChangeHandler}
+                    onAddHandler={onAddHandler}
+                    selectedFilter={selectedFilter}
+                    setSelectedFilter={onSelectedFilterHandler}
+                    productItems={productItems}
+                    loading={loading}
+                    />
               </ProtectedRoute>
             } />
 
             <Route path='/articles' element={
               <ProtectedRoute>
-                  <Navbar />
+                  <Navbar cartItems={cartItems} />
                   <Articles />
               </ProtectedRoute>
             } />

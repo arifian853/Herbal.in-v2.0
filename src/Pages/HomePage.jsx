@@ -47,14 +47,14 @@ export const HomePage = ({ onAddHandler }) => {
         <div className="homepage-main-offers">
             {
                 productsOffer.map((productOffer) => (
-                    <div className="product-item">
+                    <div className="product-item" key={productOffer.id}>
                         <img src={productOffer.product_img} alt="Product Offers" className="product-img" />
                         <div className="product-desc">
                         <p className='product-category'>{productOffer.product_ctg}</p>
                         <p className='product-name font-black'><Link to={`/products/${productOffer.id}`}>{productOffer.product_name}</Link></p>
                         <p>Harga : <NumericFormat value={productOffer.product_price} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={'.00,-'}/> </p>
                             <div className="flex items-center text-center">
-                                <button className='btn-add-to-cart flex items-center justify-center text-sm gap-1' onClick={() => onAddHandler(productOffer)}> Beli sekarang <BsCartPlus /> </button>
+                                <button className='btn-add-to-cart flex items-center justify-center text-sm gap-1' onClick={() => onAddHandler(productOffer)}> Masuk Keranjang <BsCartPlus /> </button>
                             </div>
                         </div>
                     </div>

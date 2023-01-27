@@ -68,7 +68,7 @@ export const Navbar = ({ cartItems }) => {
                         <li className={`p-3 ${activeTab === 'Cart' ? 'nav-links' : ''}`} onClick={() => setActiveTab('Cart')}>
                             Keranjang {' '}
                         <span className="badge badge-warning" id="lblCartCount">
-                          {/* {cartItems.length} */} 2
+                            {cartItems.length} 
                         </span>
                         </li>
                     </Link>
