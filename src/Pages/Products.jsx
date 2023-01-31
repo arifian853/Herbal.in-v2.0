@@ -50,7 +50,7 @@ export const Products = ({ productItems, onAddHandler, keyword, keywordChange, s
                       </div>
                   </div>
                         
-                    ))
+                    )) 
 
                     :
 
@@ -66,10 +66,10 @@ export const Products = ({ productItems, onAddHandler, keyword, keywordChange, s
                               <button className='btn-add-to-cart flex items-center justify-center text-sm gap-1' onClick={() => onAddHandler(productItem)}> Masuk Keranjang <BsCartPlus /> </button>
                           </div>
                       </div>
-                  </div>
-                        
+                  </div>  
                     ))
                 } 
+                
           </div>
       </div>
     <FooterInside />
