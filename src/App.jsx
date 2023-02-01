@@ -15,6 +15,7 @@ import { HomePage } from './Pages/HomePage';
 import { Navbar } from './Components/Navbar';
 import { Articles } from './Pages/Articles';
 import { Products } from './Pages/Products';
+import { ProductDetail } from './Pages/ProductDetail';
 
 
 function App() {
@@ -111,6 +112,16 @@ function App() {
               </ProtectedRoute>
             } />
 
+            {/* Product Detail Page */}
+
+            <Route path='/products/:id' element={
+              <ProtectedRoute>
+                <Navbar cartItems={cartItems} products={productItems} />
+                <ProductDetail products={productItems} onAddHandler={onAddHandler} />
+              </ProtectedRoute>
+            } />
+
+            {/* Articles Page */}
             <Route path='/articles' element={
               <ProtectedRoute>
                   <Navbar cartItems={cartItems} />

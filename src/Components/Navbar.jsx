@@ -20,10 +20,10 @@ export const Navbar = ({ cartItems }) => {
   useEffect(() => {
     if (location.pathname === '/home') {
       setActiveTab('Home');
-    } else if (location.pathname === '/articles') {
-      setActiveTab('Articles');
     } else if (location.pathname === '/products') {
       setActiveTab('Products');
+    } else if (location.pathname === '/articles') {
+      setActiveTab('Articles');
     } else if (location.pathname === '/cart') {
       setActiveTab('Cart');
     } else {
