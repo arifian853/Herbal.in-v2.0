@@ -9,7 +9,8 @@ import { BsBagCheckFill, BsCartPlus } from 'react-icons/bs';
 import { useUserAuth } from '../Context/UserAuthContext';
 import { FooterInside } from '../Components/FooterInside';
 
-export const HomePage = ({ onAddHandler }) => {
+
+export const HomePage = ({ onAddHandler }) => {    
   const { user } = useUserAuth();
   const productsOffer = getProdOffers();
 

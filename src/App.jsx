@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useSearchParams } from 'react-router-dom';
+import { Route, Routes, useSearchParams  } from 'react-router-dom';
 import './App.css';
 
 import { getAllProducts } from './Utils/ProductsFetcher';
@@ -14,6 +14,7 @@ import { NotFoundPage } from './Pages/NotFoundPage';
 import { HomePage } from './Pages/HomePage';
 import { Navbar } from './Components/Navbar';
 import { Articles } from './Pages/Articles';
+import { ArticleDetail } from './Pages/ArticleDetail';
 import { Products } from './Pages/Products';
 import { ProductDetail } from './Pages/ProductDetail';
 
@@ -89,7 +90,7 @@ function App() {
             <Route path='/admin-login' element={<AdminLoginPage />} />
 
             {/* Home Page */}
-            <Route path='/home' element={
+            <Route exact path='/home' element={
               <ProtectedRoute>
                   <Navbar cartItems={cartItems} />
                   <HomePage onAddHandler={onAddHandler} />
@@ -126,6 +127,14 @@ function App() {
               <ProtectedRoute>
                   <Navbar cartItems={cartItems} />
                   <Articles />
+              </ProtectedRoute>
+            } />
+
+            {/* Article Detail Page */}
+            <Route path='/articles/:id' element={
+              <ProtectedRoute>
+                  <Navbar cartItems={cartItems} />
+                  <ArticleDetail />
               </ProtectedRoute>
             } />
 

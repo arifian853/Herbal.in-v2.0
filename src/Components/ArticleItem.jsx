@@ -13,7 +13,7 @@ export const ArticleItem = ({ id, createdAt, article_title, article_image, artic
             <p className='text-sm opacity-80'>{showFormattedDate(createdAt)}</p>
             <hr className='line-long' />
             <p className='article-item-desc'>{article_description}</p>
-            <p className='article-name text-1xl font-black'><Link to={`/articles/${id}`}>Read More</Link></p>
+            <p className='article-name text-1xl font-black'><Link to={`/articles/${id}`}>Selengkapnya</Link></p>
         </div>
     </div>
   )
