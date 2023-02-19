@@ -14,9 +14,11 @@ import { NotFoundPage } from './Pages/NotFoundPage';
 import { HomePage } from './Pages/HomePage';
 import { Navbar } from './Components/Navbar';
 import { Articles } from './Pages/Articles';
-import { ArticleDetail } from './Pages/ArticleDetail';
+import { ArticleDetailPageWrapper } from './Pages/ArticleDetailPage';
 import { Products } from './Pages/Products';
 import { ProductDetail } from './Pages/ProductDetail';
+import { ScrollToTop } from './Components/ScrollToTop';
+
 
 
 function App() {
@@ -73,6 +75,7 @@ function App() {
     <>
       <main>
         <UserAuthContextProvider>
+          <ScrollToTop />
           <Routes>
             {/* Not Found Page */}
             <Route path='*' element={<NotFoundPage />} />
@@ -134,7 +137,7 @@ function App() {
             <Route path='/articles/:id' element={
               <ProtectedRoute>
                   <Navbar cartItems={cartItems} />
-                  <ArticleDetail />
+                  <ArticleDetailPageWrapper />
               </ProtectedRoute>
             } />
 

@@ -4,25 +4,27 @@ import { ArticleBody } from '../Components/ArticleBody';
 import { getArticles } from '../Utils/ArticleFetcher';
 import { FooterInside } from '../Components/FooterInside';
 
-export const Articles= () => {
+export const Articles = () => {
   const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     getArticles().then(({ data }) => {
-        setArticles(data);
-        setLoading(false);
+      setArticles(data);
+      setLoading(false);
     });
 
     return () => {
-        setLoading(true);
+      setLoading(true);
     }
-}, []);
+  }, []);
 
-  if(loading) {
-    <div className="loading">
-       <span class="loader"></span>
-    </div>
+  if (loading) {
+    return (
+      <div className="loading">
+        <span class="loader"></span>
+      </div>
+    )
   }
   return (
     <div>
