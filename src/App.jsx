@@ -19,8 +19,6 @@ import { Products } from './Pages/Products';
 import { ProductDetail } from './Pages/ProductDetail';
 import { ScrollToTop } from './Components/ScrollToTop';
 
-
-
 function App() {
   const [loading, setLoading] = useState(true);
   const [productItems, setProductItems] = useState([]);

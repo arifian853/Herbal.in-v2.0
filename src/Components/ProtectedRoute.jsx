@@ -1,17 +1,11 @@
-import { React, useState } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { useUserAuth } from '../Context/UserAuthContext';
 
 export const ProtectedRoute = ({ children }) => {
-    const [user, setUser] = useState({})
-
-    onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-    });
-
+    let { user } = useUserAuth();
     if (!user) {
-        return <Navigate to="/" />
-    }
+       return <Navigate to ="/" /> 
+    } 
     return children
 };
