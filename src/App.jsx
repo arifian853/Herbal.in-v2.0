@@ -1,10 +1,11 @@
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useSearchParams  } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
 import './App.css';
 
 import { getAllProducts } from './Utils/ProductsFetcher';
 
 import { UserAuthContextProvider } from './Context/UserAuthContext';
+import toast, { Toaster } from 'react-hot-toast';
 import { ProtectedRoute } from './Components/ProtectedRoute';
 import { LandingPage } from './Pages/LandingPage';
 import { LoginPage } from './Pages/LoginPage';
@@ -17,6 +18,7 @@ import { Articles } from './Pages/Articles';
 import { ArticleDetailPageWrapper } from './Pages/ArticleDetailPage';
 import { Products } from './Pages/Products';
 import { ProductDetail } from './Pages/ProductDetail';
+import { CartPage } from './Pages/CartPage';
 import { ScrollToTop } from './Components/ScrollToTop';
 
 function App() {
@@ -58,22 +60,64 @@ function App() {
       setCartItems(cartItems.map((cartItem) => (cartItem.id === productItem.id ? { ...productPresent, product_qty: productPresent.product_qty + 1 } : cartItem)));
     }
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+    toast.success('Item ditambahkan', {
+      position: "bottom-center",
+      style: {
+        "border": "1px solid #509d69",
+        "backgroundColor": "#eff5f5",
+        "color": "black",
+      }
+    });
   }
 
-  // function onRemoveHandler(productItem) {
-  //   const productPresent = cartItems.find((cartItem) => cartItem.id === productItem.id);
-  //   if (productPresent.product_qty === 1) {
-  //     setCartItems(cartItems.filter((cartItem) => cartItem.id !== productItem.id));
-  //   } else {
-  //     setCartItems(cartItems.map((cartItem) => (cartItem.id === productItem.id ? { ...productPresent, product_qty: productPresent.product_qty - 1 } : cartItem)));
-  //   }
-  // }
+  function onRemoveHandler(productItem) {
+    const productPresent = cartItems.find((cartItem) => cartItem.id === productItem.id);
+    if (productPresent.product_qty === 1) {
+      setCartItems(cartItems.filter((cartItem) => cartItem.id !== productItem.id));
+    } else {
+      setCartItems(cartItems.map((cartItem) => (cartItem.id === productItem.id ? { ...productPresent, product_qty: productPresent.product_qty - 1 } : cartItem)));
+    }
+    toast.success('Item dihapus', {
+      position: "bottom-center",
+      style: {
+        "border": "1px solid #509d69",
+        "backgroundColor": "#eff5f5",
+        "color": "black",
+      }
+    });
+  }
+
+  function onClearItemHandler(productItem) {
+    setCartItems(cartItems.filter((cartItem) => cartItem.id !== productItem.id));
+    toast.success('Item dihapus', {
+      position: "bottom-center",
+      style: {
+        "border": "1px solid #509d69",
+        "backgroundColor": "#eff5f5",
+        "color": "black",
+      }
+    });
+  }
+
+  function onClearCartHandler() {
+    setCartItems([]);
+    toast.success('Semua item dihapus', {
+      position: "bottom-center",
+      style: {
+        "border": "1px solid #509d69",
+        "backgroundColor": "#eff5f5",
+        "color": "black",
+      }
+    });
+  }
 
   return (
     <>
       <main>
         <UserAuthContextProvider>
           <ScrollToTop />
+          <Toaster />
           <Routes>
             {/* Not Found Page */}
             <Route path='*' element={<NotFoundPage />} />
@@ -93,24 +137,24 @@ function App() {
             {/* Home Page */}
             <Route exact path='/home' element={
               <ProtectedRoute>
-                  <Navbar cartItems={cartItems} />
-                  <HomePage onAddHandler={onAddHandler} />
+                <Navbar cartItems={cartItems} />
+                <HomePage onAddHandler={onAddHandler} />
               </ProtectedRoute>
             } />
 
             {/* Products Page */}
             <Route path='/products' element={
               <ProtectedRoute>
-                  <Navbar cartItems={cartItems} />
-                  <Products  
-                    keyword={keyword}
-                    keywordChange={onKeywordChangeHandler}
-                    onAddHandler={onAddHandler}
-                    selectedFilter={selectedFilter}
-                    setSelectedFilter={onSelectedFilterHandler}
-                    productItems={productItems}
-                    loading={loading}
-                    />
+                <Navbar cartItems={cartItems} />
+                <Products
+                  keyword={keyword}
+                  keywordChange={onKeywordChangeHandler}
+                  onAddHandler={onAddHandler}
+                  selectedFilter={selectedFilter}
+                  setSelectedFilter={onSelectedFilterHandler}
+                  productItems={productItems}
+                  loading={loading}
+                />
               </ProtectedRoute>
             } />
 
@@ -126,16 +170,24 @@ function App() {
             {/* Articles Page */}
             <Route path='/articles' element={
               <ProtectedRoute>
-                  <Navbar cartItems={cartItems} />
-                  <Articles />
+                <Navbar cartItems={cartItems} />
+                <Articles />
               </ProtectedRoute>
             } />
 
             {/* Article Detail Page */}
             <Route path='/articles/:id' element={
               <ProtectedRoute>
-                  <Navbar cartItems={cartItems} />
-                  <ArticleDetailPageWrapper />
+                <Navbar cartItems={cartItems} />
+                <ArticleDetailPageWrapper />
+              </ProtectedRoute>
+            } />
+
+            {/* Cart Page */}
+            <Route path='/cart' element={
+              <ProtectedRoute>
+                <Navbar cartItems={cartItems} />
+                <CartPage cartItems={cartItems} onAddHandler={onAddHandler} onRemoveHandler={onRemoveHandler} onClearItemHandler={onClearItemHandler} onClearCartHandler={onClearCartHandler} />
               </ProtectedRoute>
             } />
 

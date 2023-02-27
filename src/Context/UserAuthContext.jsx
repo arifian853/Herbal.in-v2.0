@@ -5,7 +5,7 @@ import { auth } from "../firebase";
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState({});
 
     function signupFunc(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -15,7 +15,7 @@ export function UserAuthContextProvider({ children }) {
     }
 
     function logOut() {
-        setUser(null)
+        setUser(null);
         return signOut(auth);
     } 
     useEffect(() => {
