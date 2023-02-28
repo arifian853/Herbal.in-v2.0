@@ -3,11 +3,15 @@ import { Link } from 'react-router-dom';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { TbDatabaseOff } from 'react-icons/tb';
 import { NumericFormat } from 'react-number-format';
+import { Helmet } from 'react-helmet';
 
 export const CartPage = ({ cartItems, onAddHandler, onRemoveHandler, onClearItemHandler, onClearCartHandler }) => {
   return (
     <div className='cart-page p-5'>
       <h1 className='text-3xl font-black text-center pb-4'>Keranjang belanja</h1>
+      <Helmet>
+        <title>Herbal.in 2.0 - Keranjang</title>
+      </Helmet>
       <hr className='line-short' />
       {
         cartItems.length === 0 ? (

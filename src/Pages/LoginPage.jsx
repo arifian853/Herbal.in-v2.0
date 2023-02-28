@@ -25,9 +25,11 @@ export const LoginPage = () => {
   useEffect(() => {
     if(error) {
         toast.error(`${error}`, {
-            position: "top-right",
+            position: "bottom-center",
             style: {
-              "border" : "2px solid #509d69"
+              "border": "1px solid #509d69",
+              "backgroundColor": "#eff5f5",
+              "color": "black",
             }
         });
     } 

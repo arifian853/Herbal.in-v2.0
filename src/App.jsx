@@ -19,6 +19,7 @@ import { ArticleDetailPageWrapper } from './Pages/ArticleDetailPage';
 import { Products } from './Pages/Products';
 import { ProductDetail } from './Pages/ProductDetail';
 import { CartPage } from './Pages/CartPage';
+import { CheckoutPage } from './Pages/CheckoutPage';
 import { ScrollToTop } from './Components/ScrollToTop';
 
 function App() {
@@ -66,7 +67,7 @@ function App() {
       style: {
         "border": "1px solid #509d69",
         "backgroundColor": "#eff5f5",
-        "color": "black",
+        "color": "black", 
       }
     });
   }
@@ -188,6 +189,14 @@ function App() {
               <ProtectedRoute>
                 <Navbar cartItems={cartItems} />
                 <CartPage cartItems={cartItems} onAddHandler={onAddHandler} onRemoveHandler={onRemoveHandler} onClearItemHandler={onClearItemHandler} onClearCartHandler={onClearCartHandler} />
+              </ProtectedRoute>
+            } />
+
+            {/* Checkout Page */}
+            <Route path='/checkout' element={
+              <ProtectedRoute>
+                <Navbar cartItems={cartItems} />
+                <CheckoutPage />
               </ProtectedRoute>
             } />
 
